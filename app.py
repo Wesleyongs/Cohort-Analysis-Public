@@ -24,8 +24,8 @@ import os
 st.set_page_config(layout="wide")
 st.write("""
 # Online Corhort Analysis Generator
-This app tracks **cohort analysis** for any given period - This a popular analysis many e-commerce company use to track customer retention rates  
-Ensure input **csv** has the following columns  
+This app generates the **cohort analysis** report for any given period - This a popular analysis many e-commerce company employ to track customer retention rates  
+Ensure input **csv** has the following columns:  
 > 1. month  
 > 2. order_id  
 > 3. customer_id      
@@ -100,11 +100,13 @@ def show_cohort_analysis(df, region):
     sns.set(style='white')
     fig3 = plt.figure(figsize=(18, 12))
     sns.heatmap(user_retention.T, mask=user_retention.T.isnull(), annot=True, fmt='.0%')
+    col1.write("## Heatmap")
     col1.pyplot(fig3,use_column_width=True)
     
     heat_map_values = cohorts['TotalUsers'].unstack(0)
     fig4 = plt.figure(figsize=(18, 12))
     sns.heatmap(heat_map_values.T, mask=heat_map_values.T.isnull(), annot=True, fmt='.20g')
+    col2.write("## Heatmap (Raw Values)")
     col2.pyplot(fig4,use_column_width=True)
     
     # st.dataframe(heat_map_values.T)
